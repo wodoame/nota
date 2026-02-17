@@ -22,6 +22,7 @@ Implemented a health check endpoint to monitor application status.
 Established a basic Continuous Integration pipeline using GitHub Actions.
 *   **Workflow**: `.github/workflows/ci.yml` is set up to build the project and run tests on every push.
 ![CI Pipeline Screenshot](screenshots/nota-CI-pipeline.png)
+![Successful CI Build Screenshot](screenshots/nota-CI-build-success.png)
 
 ### 4. Testing Implementation
 Integrated unit tests for the `NoteController` to ensure the reliability of the API endpoints.
