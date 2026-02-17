@@ -6,9 +6,6 @@
 *   **Applying Feedback**: Switching to H2 for tests immediately improved the reliability of our testing process and CI pipeline.
 *   **Architecture**: Refactoring to use `NoteService` improved the separation of concerns and made the codebase more maintainable.
 
-### What Could Be Improved
-*   *(Placeholder: Add any observations about challenges faced during this sprint)*
-
 ## Key Lessons Learned
 *   **Environment Isolation**: Using in-memory databases for testing is crucial for robust CI/CD pipelines.
 *   **Error Handling**: Standardizing error responses early saves time and improves the API client experience.
