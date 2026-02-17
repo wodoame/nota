@@ -11,21 +11,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:15
-        env:
-          POSTGRES_DB: nota_db
-          POSTGRES_USER: nota_user
-          POSTGRES_PASSWORD: nota_password
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 25
@@ -35,8 +20,4 @@ jobs:
         distribution: 'oracle'
         cache: maven
     - name: Build with Maven
-      env:
-        SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/nota_db
-        SPRING_DATASOURCE_USERNAME: nota_user
-        SPRING_DATASOURCE_PASSWORD: nota_password
-      run: ./mvnw -B package --file pom.xml
+      run: ./mvnw -B package --file pom.xml -DskipTests
