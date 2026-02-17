@@ -1,7 +1,7 @@
 package com.amalitech.nota.controller;
 
 import com.amalitech.nota.entity.Note;
-import com.amalitech.nota.repository.NoteRepository;
+import com.amalitech.nota.service.NoteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,20 +12,24 @@ import java.util.List;
 @RequestMapping("/api/notes")
 public class NoteController {
 
-    private final NoteRepository noteRepository;
+    private final NoteService noteService;
 
-    public NoteController(NoteRepository noteRepository) {
-        this.noteRepository = noteRepository;
+    public NoteController(NoteService noteService) {
+        this.noteService = noteService;
     }
 
     @GetMapping
     public List<Note> getAllNotes() {
-        return noteRepository.findAllByOrderByCreatedAtDesc();
+        return noteService.getAllNotes();
     }
 
     @PostMapping
     public ResponseEntity<Note> createNote(@RequestBody Note note) {
-        Note savedNote = noteRepository.save(note);
-        return new ResponseEntity<>(savedNote, HttpStatus.CREATED);
+        return new ResponseEntity<>(noteService.createNote(note), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Note> updateNote(@PathVariable Long id, @RequestBody Note noteDetails) {
+        return ResponseEntity.ok(noteService.updateNote(id, noteDetails));
     }
 }
