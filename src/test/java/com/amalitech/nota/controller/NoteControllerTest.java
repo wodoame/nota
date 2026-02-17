@@ -42,6 +42,19 @@ class NoteControllerTest {
     }
 
     @Test
+    void shouldSearchNotes() throws Exception {
+        Note note = new Note();
+        note.setId(1L);
+        note.setTitle("Test Note");
+
+        Mockito.when(noteService.searchNotes("Test")).thenReturn(List.of(note));
+
+        mockMvc.perform(get("/api/notes?q=Test"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].title").value("Test Note"));
+    }
+
+    @Test
     void shouldCreateNote() throws Exception {
         Note note = new Note();
         note.setId(1L);

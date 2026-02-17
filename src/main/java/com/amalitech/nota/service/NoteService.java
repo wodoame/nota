@@ -11,6 +11,8 @@ import java.util.List;
 @Service
 public class NoteService {
 
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(NoteService.class);
+
     private final NoteRepository noteRepository;
 
     public NoteService(NoteRepository noteRepository) {
@@ -21,14 +23,21 @@ public class NoteService {
         return noteRepository.findAllByOrderByCreatedAtDesc();
     }
 
+    public List<Note> searchNotes(String keyword) {
+        logger.info("Searching notes with keyword: {}", keyword);
+        return noteRepository.findByTitleContainingIgnoreCaseOrderByCreatedAtDesc(keyword);
+    }
+
     public Note createNote(Note note) {
         if (note.getCreatedAt() == null) {
             note.setCreatedAt(LocalDateTime.now());
         }
+        logger.info("Creating new note with title: {}", note.getTitle());
         return noteRepository.save(note);
     }
 
     public Note updateNote(Long id, Note noteDetails) {
+        logger.info("Updating note with id: {}", id);
         Note note = noteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Note not found with id: " + id));
 

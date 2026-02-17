@@ -19,7 +19,10 @@ public class NoteController {
     }
 
     @GetMapping
-    public List<Note> getAllNotes() {
+    public List<Note> getAllNotes(@RequestParam(required = false) String q) {
+        if (q != null && !q.isEmpty()) {
+            return noteService.searchNotes(q);
+        }
         return noteService.getAllNotes();
     }
 
