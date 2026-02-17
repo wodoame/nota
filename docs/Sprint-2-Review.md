@@ -52,7 +52,7 @@ The CI pipeline successfully built the project and executed all tests using the 
 *   **Build Status**: Success
 *   **Test Results**: All tests passed in the CI environment.
 
-![CI Build Success](PLACEHOLDER: Insert screenshot of successful GitHub Actions run here)
+![CI Build Success](screenshots/nota-successful-build-2.png)
 
 ## Metrics
 *   **Velocity**: Successfully delivered all planned backlog items (Update Note, Search Notes, Monitoring).
